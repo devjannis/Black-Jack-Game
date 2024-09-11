@@ -1,44 +1,44 @@
 import random
 
-# Kartenwerte für das Blackjack-Spiel
+# Card values for the Blackjack game
 card_values = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
     '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10,
     'Q': 10, 'K': 10, 'A': 11
 }
 
-# Kartenliste
+# List of cards
 cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'] * 4
 
 def get_value(hand):
     """
-    Berechnet den Gesamtwert der Hand unter Berücksichtigung der Asse.
+    Calculates the total value of the hand, taking aces into account.
 
-    :param hand: Liste von Karten, die die Hand des Spielers oder Dealers repräsentiert
-    :return: Der berechnete Gesamtwert der Hand
+    :param hand: List of cards representing the player's or dealer's hand
+    :return: The calculated total value of the hand
     """
-    total = 0  # Gesamtwert der Hand initialisieren
-    ace_count = 0  # Anzahl der Asse in der Hand zählen
+    total = 0  # Initialize total value of the hand
+    ace_count = 0  # Count the number of aces in the hand
 
-    # Schleife über jede Karte in der Hand
+    # Loop through each card in the hand
     for card in hand:
-        total += card_values[card]  # Kartenwert zur Gesamtsumme hinzufügen
-        if card == 'A':  # Wenn die Karte ein Ass ist
-            ace_count += 1  # Erhöhe den Ass-Zähler
+        total += card_values[card]  # Add card value to total sum
+        if card == 'A':  # If the card is an ace
+            ace_count += 1  # Increase ace counter
 
-    # Anpassen des Gesamtwerts, wenn die Hand über 21 liegt und Asse vorhanden sind
+    # Adjust the total value if the hand exceeds 21 and aces are present
     while total > 21 and ace_count > 0:
-        total -= 10  # Reduziere den Gesamtwert um 10 (Ass von 11 auf 1 ändern)
-        ace_count -= 1  # Verringere die Anzahl der Asse, die als 11 gezählt werden
+        total -= 10  # Reduce total value by 10 (change ace from 11 to 1)
+        ace_count -= 1  # Decrease the number of aces counted as 11
 
-    return total  # Rückgabe des berechneten Gesamtwerts
+    return total  # Return the calculated total value
 
 def draw_card():
     """
-    Zieht eine zufällige Karte aus dem Kartendeck.
+    Draws a random card from the deck.
 
-    :return: Eine Karte, die zufällig aus dem Deck gezogen wird
+    :return: A card randomly drawn from the deck
     """
-    temp_cards = cards[:]  # Erstelle eine Kopie des Kartendecks
-    random.shuffle(temp_cards)  # Mische das Deck zufällig
-    return temp_cards.pop(0)  # Ziehe die oberste Karte aus dem gemischten Deck
+    temp_cards = cards[:]  # Create a copy of the deck
+    random.shuffle(temp_cards)  # Shuffle the deck randomly
+    return temp_cards.pop(0)  # Draw the top card from the shuffled deck
